@@ -8,9 +8,9 @@
     "dev": "nodemon index.ts"
   },
   "author": {
-    "name": "ViktorZ ubtsov",
+    "name": "Viktor Zubtsov",
     "email": "zubtsov_viktor@smartworld.team",
-    "url": "smartworld.team"
+    "url": "https://github.com/ViktorZubtsov"
   },
   "dependencies": {
     "axios": "^0.21.1",
