@@ -27,6 +27,10 @@ export class User implements  IUser{
     public setPass(pass: string): void {
         this.generatePass(pass)
     }
+    public getPass(): any {
+       return  this.pass
+    //    TODO: Сделать разшифровку пароля.
+    }
 }
 
 

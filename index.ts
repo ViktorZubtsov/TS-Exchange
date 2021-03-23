@@ -9,3 +9,4 @@ viktor.setPass('dddd')
 
 
 
+console.log(viktor.getPass())
