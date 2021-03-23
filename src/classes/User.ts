@@ -1,14 +1,13 @@
 import {IUser} from "../interfaces/IUser";
+import {Md5} from "ts-md5";
 
 
 export class User implements  IUser{
    protected mail: string
-   protected role: string
+   protected pass: any
 
-
-    constructor(mail,role) {
+    constructor(mail) {
         this.mail = mail
-        this.role = role
     }
 
     public getEmail(): string {
@@ -18,8 +17,22 @@ export class User implements  IUser{
         this.mail = newMail
     }
 
+    private generatePass(pass): void {
+        const md5 = new Md5();
+        md5.appendStr(pass)
+        md5.start()
+        this.pass  = md5.end()
+    }
 
-    // setEmail(): void
-    // getPass(): string
-    // setPass(): void
+    public setPass(pass: string): void {
+        this.generatePass(pass)
+    }
 }
+
+
+
+
+
+
+
+
