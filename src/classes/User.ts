@@ -34,7 +34,9 @@ export class User implements  IUser{
 }
 
 
+export class UserGoals extends User{
 
+}
 
 
 

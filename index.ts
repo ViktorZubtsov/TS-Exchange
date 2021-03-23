@@ -1,12 +1,13 @@
-import {User} from "./src/classes/User"
+import {UserGoals} from "./src/classes/User"
 
 
 
-const viktor = new User('mr.viktor.1995@yande.ru')
+const viktor = new UserGoals('mr.viktor.1995@yande.ru')
 
 viktor.setPass('dddd')
 
 
+console.log(viktor)
 
 
-console.log(viktor.getPass())
+
