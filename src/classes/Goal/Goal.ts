@@ -1,4 +1,4 @@
-import {ITypeGoal} from "../../interfaces/ITypeGoal";
+import {ITypeGoal} from "../../interfaces/Goal/ITypeGoal";
 
 export class Goal {
     goals: ITypeGoal[]

@@ -1,4 +1,4 @@
-import {IUser} from "../../interfaces/IUser";
+import {IUser} from "../../interfaces/User/IUser";
 import {Md5} from "ts-md5";
 
 export class User implements IUser{

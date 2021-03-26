@@ -1,4 +1,4 @@
-import {IUserGoals} from "../../interfaces/IUserGoals";
+import {IUserGoals} from "../../interfaces/User/IUserGoals";
 import {User} from "./User";
 
 
