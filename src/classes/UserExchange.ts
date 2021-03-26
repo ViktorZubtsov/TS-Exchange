@@ -1,10 +1,9 @@
-export class UserExchange {
+import {User} from "./User/User";
 
-    sortByKey(arr: [],key: string): void {
+
+export class UserExchange extends User{
+
+    public sortByKey(arr: [],key: string): void {
         console.log('sortByKey', arr , key )
     }
 }
-
-
-
-
