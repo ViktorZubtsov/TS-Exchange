@@ -1,8 +1,13 @@
+1) Изпользовать  обстрактный класс для связывания сущностей, и их добаваления
+	OCP
+
+
+
 import {IUser} from "../interfaces/IUser";
 import {Md5} from "ts-md5";
 
 
-export class User implements  IUser{
+export class UserExchange implements  IUser{
    protected mail: string
    protected pass: any
 
@@ -34,11 +39,7 @@ export class User implements  IUser{
 }
 
 
-export class UserGoals extends User{
+export class UserGoals extends UserExchange{
 
 }
-
-
-
-
 

@@ -1,13 +1,3 @@
-import {UserGoals} from "./src/classes/User"
+import {UserExchange} from "./src/classes/UserExchange";
 
-
-
-const viktor = new UserGoals('mr.viktor.1995@yande.ru')
-
-viktor.setPass('dddd')
-
-
-console.log(viktor)
-
-
-
+const viktor = new UserExchange()
