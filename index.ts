@@ -1,14 +1,5 @@
-import {Goal} from "./src/classes/Goal/Goal";
+import {UserGoals} from "./src/classes/User/UserGoals"
 
-
-
-enum typeGoal {
-    saving,
-    for,
-    multiply
-}
-
-
-const goal1 = new Goal(1, typeGoal.saving,3,false, 222)
-
-console.log(goal1)
+const a = new UserGoals('dcdcd')
+a.setGoal(1,2,3,false,3)
+console.log(a)
