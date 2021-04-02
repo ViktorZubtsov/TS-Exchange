@@ -1,6 +1,14 @@
-import {UserExchange} from "./src/classes/UserExchange";
+import {Goal} from "./src/classes/Goal/Goal";
 
-const viktor = new UserExchange('mr.viktor.1996@yandex.ru')
 
-console.log(viktor)
 
+enum typeGoal {
+    saving,
+    for,
+    multiply
+}
+
+
+const goal1 = new Goal(1, typeGoal.saving,3,false, 222)
+
+console.log(goal1)
