@@ -1,19 +1,13 @@
 import {IUserGoals} from "../../interfaces/User/IUserGoals";
 import {User} from "./User";
 import {Goal} from "../Goal/Goal";
-
-
-enum typeGoal {
-    saving,
-    for,
-    multiply
-}
+import {goalsDb} from "../../db/goalsDb"
 
 export class UserGoals extends User implements  IUserGoals{
-    goals: Array<object> = []
+    goals: Array<object> = goalsDb
 
     getAllGoals(): Array<object> {
-        return [{name: 'getAllGoals'}];
+        return this.goals
     }
 
     getCompleteGoals(): Array<object> {

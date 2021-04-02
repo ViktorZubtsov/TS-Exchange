@@ -13,6 +13,5 @@ export class Goal implements IGoal{
         this.cryptoId = cryptoId
         this.goalComplete =  goalComplete
         this.to  = to
-
     }
 }

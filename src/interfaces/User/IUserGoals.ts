@@ -1,5 +1,3 @@
-import {IGoal} from "../Goal/IGoal";
-
 export interface IUserGoals {
     getAllGoals(): Array<object>,
     getGoalById(id: string): object,

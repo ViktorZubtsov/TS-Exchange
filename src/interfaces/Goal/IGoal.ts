@@ -5,3 +5,8 @@ export interface IGoal {
     goalComplete: boolean,
     to: number
 }
+export enum typeGoal {
+    saving,
+    for,
+    multiply
+}
