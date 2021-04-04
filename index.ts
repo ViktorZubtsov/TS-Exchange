@@ -1,13 +1,7 @@
-import {UserGoals} from "./src/classes/User"
+import {UserExchange} from "./src/classes/UserExchange";
 
+const viktor = new UserExchange('mr.viktor.1996.@yandex.ru');
+viktor.setGoal(1,2,4,false,3);
+viktor.setEmail('viktor.1996');
 
-
-const viktor = new UserGoals('mr.viktor.1995@yande.ru')
-
-viktor.setPass('dddd')
-
-
-console.log(viktor)
-
-
-
+console.log(viktor);
