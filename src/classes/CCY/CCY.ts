@@ -1,4 +1,4 @@
-import {ICCY} from "../../interfaces/CCY/ICCY"
+import {ICCY} from "../../interfaces/CCY/ICCY";
 
 export class CCY implements ICCY {
     id: number;
@@ -7,3 +7,4 @@ export class CCY implements ICCY {
     numberSign: number;
 
 }
+

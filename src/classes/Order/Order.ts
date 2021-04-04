@@ -1,4 +1,4 @@
-import {IOrder} from "../../interfaces/Order/IOrder"
+import {IOrder} from "../../interfaces/Order/IOrder";
 
 export class Order implements IOrder {
     id: number;
