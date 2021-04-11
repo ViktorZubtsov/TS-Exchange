@@ -1,38 +1,53 @@
 import {IUserGoals} from "../../interfaces/User/IUserGoals";
 import {User} from "./User";
 import {Goal} from "../Goal/Goal";
-import {goalsDb} from "../../db/goalsDb"
+import {IGoal} from "../../interfaces/Goal/IGoal";
+import {goalsDb} from "../../db/goalsDb";
 
-export class UserGoals extends User implements  IUserGoals{
-    goals: Array<object> = goalsDb
+export class UserGoals extends User implements IUserGoals{
+    private goals: Array<IGoal> = goalsDb;
 
-    getAllGoals(): Array<object> {
-        return this.goals
+    public getAllGoals(): Array<IGoal> {
+        return this.goals;
     }
 
-    getCompleteGoals(): Array<object> {
-        return [{name: 'getAllGoals'}];
+    public getCompleteGoals(): Array<IGoal> {
+        const completeGoals = [];
+        this.goals.find((item) => {
+            if (item.goalComplete) {
+                completeGoals.push(item);
+            }
+        }
+        );
+        return completeGoals;
     }
 
-    getGoalById(id: string): object {
-        return undefined;
+    public getGoalById(id: number): IGoal {
+        return this.goals.find(item => item.id === id);
     }
 
-    getNotCompleteGoals(): Array<object> {
-        return [{name: 'getAllGoals'}];
+    public getNotCompleteGoals(): Array<IGoal> {
+        const notCompleteGoals = [];
+        this.goals.find((item) => {
+            if (!item.goalComplete) {
+                notCompleteGoals.push(item);
+            }
+        }
+        );
+        return notCompleteGoals;
     }
 
-    printGoal(): void {
-        console.log('printGoal')
+    public printGoal(): void {
+        console.log('printGoal');
     }
-    setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void  {
-        const goal = new Goal(id, typeId, cryptoId, goalComplete, to)
+    public setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void {
+        const goal = new Goal(id, typeId, cryptoId, goalComplete, to);
         this.goals.push({
             id: goal.id,
             typeId: goal.typeId,
             cryptoId: goal.cryptoId,
             goalComplete: goal.goalComplete,
             to: goal.to
-        })
-    };
+        });
+    }
 }
