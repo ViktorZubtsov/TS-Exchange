@@ -7,22 +7,22 @@ import {goalsDb} from "../../db/goalsDb";
 export class UserGoals extends User implements IUserGoals{
     private goals: Array<IGoal> = goalsDb;
 
-    protected  sortGoals(type?: string) {
+    protected sortGoals(type?: string) {
         const completeGoals = [];
         const notCompleteGoals = [];
 
         this.goals.find((item) => {
-                if (item.goalComplete) {
-                    completeGoals.push(item);
-                } else {
-                    notCompleteGoals.push(item);
-                }
+            if (item.goalComplete) {
+                completeGoals.push(item);
+            } else {
+                notCompleteGoals.push(item);
             }
+        }
         );
         if(type === 'completeGoals'){
-            return completeGoals
+            return completeGoals;
         } else {
-            return notCompleteGoals
+            return notCompleteGoals;
         }
     }
 
@@ -44,17 +44,17 @@ export class UserGoals extends User implements IUserGoals{
 
     public printGoal(id: number): string {
         const goal = this.getGoalById(id);
-        console.log(goal)
+        console.log(goal);
         switch (goal.typeId) {
-            case(0): {
-                return 'saving'
-            }
-            case(1): {
-                return 'for'
-            }
-            case(2): {
-                return 'multiply'
-            }
+        case(0): {
+            return 'saving';
+        }
+        case(1): {
+            return 'for';
+        }
+        case(2): {
+            return 'multiply';
+        }
         }
     }
     public setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void {
