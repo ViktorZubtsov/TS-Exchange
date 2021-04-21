@@ -1,13 +1,13 @@
 import {IUserGoals} from "../../interfaces/User/IUserGoals";
 import {User} from "./User";
 import {Goal} from "../Goal/Goal";
-import {IGoal} from "../../interfaces/Goal/IGoal";
+import {IGoal, typeGoal} from "../../interfaces/Goal/IGoal";
 import {goalsDb} from "../../db/goalsDb";
 
 export class UserGoals extends User implements IUserGoals{
     private goals: Array<IGoal> = goalsDb;
 
-    protected sortGoals(type?: string) {
+    protected  sortGoals(type?: string) {
         const completeGoals = [];
         const notCompleteGoals = [];
 
@@ -42,8 +42,20 @@ export class UserGoals extends User implements IUserGoals{
         return this.sortGoals();
     }
 
-    public printGoal(): void {
-        console.log('printGoal');
+    public printGoal(id: number): string {
+        const goal = this.getGoalById(id);
+        console.log(goal)
+        switch (goal.typeId) {
+            case(0): {
+                return 'saving'
+            }
+            case(1): {
+                return 'for'
+            }
+            case(2): {
+                return 'multiply'
+            }
+        }
     }
     public setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void {
         const goal = new Goal(id, typeId, cryptoId, goalComplete, to);
