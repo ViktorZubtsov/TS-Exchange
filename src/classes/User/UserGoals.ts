@@ -3,6 +3,7 @@ import {User} from "./User";
 import {Goal} from "../Goal/Goal";
 import {IGoal, typeGoal} from "../../interfaces/Goal/IGoal";
 import {goalsDb} from "../../db/goalsDb";
+import {getById} from "../../helpers/helpers";
 
 export class UserGoals extends User implements IUserGoals{
     private goals: Array<IGoal> = goalsDb;
@@ -35,7 +36,7 @@ export class UserGoals extends User implements IUserGoals{
     }
 
     public getGoalById(id: number): IGoal {
-        return this.goals.find(item => item.id === id);
+        return <IGoal>getById(this.goals, id);
     }
 
     public getNotCompleteGoals(): Array<IGoal> {
