@@ -7,19 +7,31 @@ import {goalsDb} from "../../db/goalsDb";
 export class UserGoals extends User implements IUserGoals{
     private goals: Array<IGoal> = goalsDb;
 
+    protected sortGoals(type?: string) {
+        const completeGoals = [];
+        const notCompleteGoals = [];
+
+        this.goals.find((item) => {
+                if (item.goalComplete) {
+                    completeGoals.push(item);
+                } else {
+                    notCompleteGoals.push(item);
+                }
+            }
+        );
+        if(type === 'completeGoals'){
+            return completeGoals
+        } else {
+            return notCompleteGoals
+        }
+    }
+
     public getAllGoals(): Array<IGoal> {
         return this.goals;
     }
 
     public getCompleteGoals(): Array<IGoal> {
-        const completeGoals = [];
-        this.goals.find((item) => {
-            if (item.goalComplete) {
-                completeGoals.push(item);
-            }
-        }
-        );
-        return completeGoals;
+        return this.sortGoals('completeGoals');
     }
 
     public getGoalById(id: number): IGoal {
@@ -27,14 +39,7 @@ export class UserGoals extends User implements IUserGoals{
     }
 
     public getNotCompleteGoals(): Array<IGoal> {
-        const notCompleteGoals = [];
-        this.goals.find((item) => {
-            if (!item.goalComplete) {
-                notCompleteGoals.push(item);
-            }
-        }
-        );
-        return notCompleteGoals;
+        return this.sortGoals();
     }
 
     public printGoal(): void {
