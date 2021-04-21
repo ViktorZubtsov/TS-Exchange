@@ -1,4 +1,4 @@
-import {typeGoal, IGoal} from "../interfaces/Goal/IGoal"
+import {typeGoal, IGoal} from "../interfaces/Goal/IGoal";
 
 export const goalsDb: Array<IGoal> = [
     {
@@ -19,4 +19,4 @@ export const goalsDb: Array<IGoal> = [
     {
         id: 3, typeId: typeGoal.multiply, cryptoId: 0, goalComplete: false, to: 6234
     },
-]
+];

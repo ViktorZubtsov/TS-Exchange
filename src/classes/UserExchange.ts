@@ -1,9 +1,8 @@
-import {UserGoals} from "./User/UserGoals";
+import {UserTrader} from "./User/UserTrader";
 
-
-export class UserExchange extends  UserGoals {
+export class UserExchange extends UserTrader {
 
     public sortByKey(arr: [],key: string): void {
-        console.log('sortByKey', arr , key )
+        console.log('sortByKey', arr , key);
     }
 }

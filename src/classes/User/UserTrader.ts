@@ -1,23 +1,34 @@
-import {IUserTrader} from "../../interfaces/User/IUserTrader"
+import {IUserTrader} from "../../interfaces/User/IUserTrader";
+import {UserGoals} from "./UserGoals";
+import {IOrder} from "../../interfaces/Order/IOrder";
+import {ordersDb} from "../../db/oredersDb";
+import {Order} from "../Order/Order";
 
-export class UserTrader implements IUserTrader {
-    getAllOrders(): object[] {
-        throw new Error("Method not implemented.");
+export class UserTrader extends UserGoals implements IUserTrader {
+    private orders: Array<IOrder> = ordersDb;
+
+    getAllOrders(): Array<IOrder> {
+        return this.orders;
     }
-    getOrderById(): object {
-        throw new Error("Method not implemented.");
+
+    getOrderById(): IOrder {
+        return undefined;
     }
-    setOrder(): void {
-        throw new Error("Method not implemented.");
-    }
+
     printAllOrders(): string {
-        throw new Error("Method not implemented.");
+        return "";
     }
+
     printOrderById(): string {
-        throw new Error("Method not implemented.");
+        return "";
     }
+
     removeOrderByKey(): void {
-        throw new Error("Method not implemented.");
+    }
+
+    setOrder(id: number, typeOrderId: number, quantity: number, give: number, get: number): void {
+        const order = new Order(id, typeOrderId, quantity, give, get);
+        this.orders.push({...order});
     }
 
 }

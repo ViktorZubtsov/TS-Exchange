@@ -59,12 +59,6 @@ export class UserGoals extends User implements IUserGoals{
     }
     public setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void {
         const goal = new Goal(id, typeId, cryptoId, goalComplete, to);
-        this.goals.push({
-            id: goal.id,
-            typeId: goal.typeId,
-            cryptoId: goal.cryptoId,
-            goalComplete: goal.goalComplete,
-            to: goal.to
-        });
+        this.goals.push({...goal});
     }
 }
