@@ -3,7 +3,7 @@ import {UserGoals} from "./UserGoals";
 import {IOrder} from "../../interfaces/Order/IOrder";
 import {ordersDb} from "../../db/oredersDb";
 import {Order} from "../Order/Order";
-import {getById} from "../../helpers/helpers";
+import {getById, removeById} from "../../helpers/helpers";
 
 export class UserTrader extends UserGoals implements IUserTrader {
     private orders: Array<IOrder> = ordersDb;
@@ -17,15 +17,17 @@ export class UserTrader extends UserGoals implements IUserTrader {
     }
 
     printAllOrders():Array<IOrder> {
+        // TODO:  что это значит
         return this.orders;
     }
 
     printOrderById(id: number): IOrder {
+        // TODO:  что это значит
         return <IOrder>getById(this.orders, id);
     }
 
-    removeOrderByKey(): void {
-
+    removeOrderByKey(id: number): void {
+        this.orders = removeById(this.orders, id);
     }
 
     setOrder(id: number, typeOrderId: number, quantity: number, give: number, get: number): void {

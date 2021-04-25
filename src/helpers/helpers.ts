@@ -1,12 +1,9 @@
-// public sortByKey(arr: [],key: string): void {
-//     console.log('sortByKey', arr , key);
-// }
 
 
-// export function sortByKey(arr: [],key: string): object {
-//     return {};
-// }
-
-export function getById(arr: Array<{id: number}>, id: number) {
+export function getById(arr, id: number) {
     return arr.find(item => item.id === id);
+}
+// TODO: разобратся с генериками
+export function removeById(arr, id: number) {
+    return arr.filter(item => item.id !== id);
 }
