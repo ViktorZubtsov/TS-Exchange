@@ -23,8 +23,8 @@ export class User implements IUser{
     }
     private generatePass(pass): void {
         const md5 = new Md5();
-        md5.appendStr(pass);
-        md5.start();
+        md5.appendStr(pass)
+            .appendByteArray(new Uint8Array(8));
         this.pass = md5.end();
     }
     public setPass(pass: string): void {
