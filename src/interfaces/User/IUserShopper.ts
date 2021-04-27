@@ -1,6 +1,8 @@
+import {ICCY} from "../CCY/ICCY";
+
 export interface IUserShopper {
     getAllBalance(): string
-    getAllCrypto(): object
+    getAllCrypto():Array<ICCY>
     getByKey(): object
     printShortBalanceByKey(): string
     printFullBalanceByKey(): string

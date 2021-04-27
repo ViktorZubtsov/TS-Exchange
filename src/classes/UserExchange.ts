@@ -1,5 +1,8 @@
-import {UserTrader} from "./User/UserTrader";
+import {UserShopper} from "./User/UserShopper";
 
-export class UserExchange extends UserTrader {
+export class UserExchange extends UserShopper {
+
 
 }
+
+

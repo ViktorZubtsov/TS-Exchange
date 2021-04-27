@@ -1,11 +1,15 @@
-import {IUserShopper} from "../../interfaces/User/IUserShopper"
+import {IUserShopper} from "../../interfaces/User/IUserShopper";
+import {ccyDb} from "../../db/ccyDb";
+import {ICCY} from "../../interfaces/CCY/ICCY";
+import {UserTrader} from "./UserTrader";
 
-export class UserShopper implements IUserShopper {
+export class UserShopper extends UserTrader implements IUserShopper {
+    private crypto: Array<ICCY> = ccyDb;
     getAllBalance(): string {
         throw new Error("Method not implemented.");
     }
-    getAllCrypto(): object {
-        throw new Error("Method not implemented.");
+    getAllCrypto(): Array<ICCY> {
+        return this.crypto;
     }
     getByKey(): object {
         throw new Error("Method not implemented.");
