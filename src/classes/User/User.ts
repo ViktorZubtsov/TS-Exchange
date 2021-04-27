@@ -4,12 +4,13 @@ import {Md5} from "ts-md5";
 
 export class User implements IUser{
     private mail: string
-    private pass: any
+    private pass: string | Int32Array
     private readonly id: number
 
-    constructor(mail: string) {
+    constructor(mail: string, pass: string) {
         this.mail = mail;
         this.id = getRandomInt(16);
+        this.pass = User.generatePass(pass);
     }
     public getId(): number {
         return this.id;
@@ -21,18 +22,23 @@ export class User implements IUser{
     public setEmail (newMail: string): void {
         this.mail = newMail;
     }
-    private generatePass(pass): void {
+    private static generatePass(pass): string | Int32Array {
         const md5 = new Md5();
         md5.appendStr(pass)
             .appendByteArray(new Uint8Array(8));
-        this.pass = md5.end();
+        return md5.end();
     }
-    public setPass(pass: string): void {
-        this.generatePass(pass);
+    public setPass(oldPass: string, pass: string): void {
+        if (this.pass === User.generatePass(oldPass)) {
+            this.pass = User.generatePass(pass);
+        }
+        else {
+            throw new Error('Старый пароль не правильный !!!');
+        }
+
     }
-    public getPass(): string {
+    public getPass(): string | Int32Array {
         return this.pass;
-        //    TODO: Сделать разшифровку пароля, и разобраться как он рабботет до конца.
     }
 
 }
