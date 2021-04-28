@@ -1,7 +1,6 @@
 import {UserExchange} from "./src/classes/UserExchange";
+import {Crypto} from "./src/classes/Crypto/Crypto";
 
-
-const viktor = new UserExchange('mr.viktor.1996.@yandex.ru', '1111');
-
+const viktor = new Crypto(1,2,100.11111111,3);
 console.log(viktor);
 
