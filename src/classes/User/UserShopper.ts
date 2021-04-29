@@ -42,7 +42,7 @@ export class UserShopper extends UserTrader implements IUserShopper {
         return `${this.getCryptoInfo(id).balance} - ${this.getCryptoInfo(id).shortName}` ;
     }
     printFullBalanceByKey(id: number): string {
-        return `${this.getCryptoInfo(id).balance} - ${this.getCryptoInfo(id).shortName}` ;
+        return `${this.getCryptoInfo(id).balance} - ${this.getCryptoInfo(id).name}` ;
     }
     getMaxBalance(): number {
         return this.calcCrypto(this.crypto)['maxBalance'];
