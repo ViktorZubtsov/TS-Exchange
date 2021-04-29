@@ -8,18 +8,21 @@ import {UserTrader} from "./UserTrader";
 export class UserShopper extends UserTrader implements IUserShopper {
     private crypto: Array<ICtypro> = cryptoDb;
 
-    private calcCtypto(crypto: Array<ICtypro>): object {
-        const balance = [];
-        const minBalance = null;
-        const maxBalance = null;
+    private calcCrypto(crypto: Array<ICtypro>): {balance: number, maxBalance: number,minBalance: number } {
+        const arrBal = [];
         crypto.forEach((item)=>{
-            this.balance.append(item.balance);
+            arrBal.push(item.balance);
         });
-        return {balance: balance};
+        let x;
+        const balance = arrBal.map(i => x += i, x = 0).reverse()[0];
+        const maxBalance = Math.max(...arrBal);
+        const minBalance = Math.min(...arrBal);
+
+        return {balance: balance, maxBalance: maxBalance, minBalance: minBalance};
     }
 
-    getAllBalance(): string {
-        throw new Error("Method not implemented.");
+    getAllBalance(): number {
+        return this.calcCrypto(this.crypto)['balance'];
     }
     getAllCrypto(): Array<ICtypro> {
         return this.crypto;
@@ -33,11 +36,11 @@ export class UserShopper extends UserTrader implements IUserShopper {
     printFullBalanceByKey(): string {
         throw new Error("Method not implemented.");
     }
-    getMaxBalance(): string {
-        throw new Error("Method not implemented.");
+    getMaxBalance(): number {
+        return this.calcCrypto(this.crypto)['maxBalance'];
     }
-    getMinBalance(): string {
-        throw new Error("Method not implemented.");
+    getMinBalance(): number {
+        return this.calcCrypto(this.crypto)['minBalance'];
     }
 
 }
