@@ -4,3 +4,9 @@ export interface ICCY {
     shortName: string 
     numberSign: number 
 }
+export enum typeCCY {
+    Bitcoin,
+    Umi,
+    PRIZM,
+    Alti
+}

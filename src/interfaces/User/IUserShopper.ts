@@ -3,9 +3,8 @@ import {ICtypro} from "../Crypto/ICtypro";
 export interface IUserShopper {
     getAllBalance(): number
     getAllCrypto():Array<ICtypro>
-    getByKey(): object
-    printShortBalanceByKey(): string
-    printFullBalanceByKey(): string
+    printShortBalanceByKey(id: number): string
+    printFullBalanceByKey(id: number): string
     getMaxBalance(): number
     getMinBalance(): number
 }
