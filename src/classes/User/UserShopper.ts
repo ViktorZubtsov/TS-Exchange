@@ -2,7 +2,7 @@ import {IUserShopper} from "../../interfaces/User/IUserShopper";
 import {ICtypro} from "../../interfaces/Crypto/ICtypro";
 import {cryptoDb} from "../../db/cryptoDb";
 import {UserTrader} from "./UserTrader";
-import {getById} from "../../helpers/helpers";
+import {getById, pruningNumbers} from "../../helpers/helpers";
 import {ccyDb} from "../../db/ccyDb";
 
 export class UserShopper extends UserTrader implements IUserShopper {
@@ -10,21 +10,26 @@ export class UserShopper extends UserTrader implements IUserShopper {
 
     private calcCrypto(crypto: Array<ICtypro>): {balance: number, maxBalance: number,minBalance: number } {
         const arrBal = [];
-        crypto.forEach((item)=>{
+        crypto.forEach((item)=> {
             arrBal.push(item.balance);
         });
         let x;
+        const to = 2;
         const balance = arrBal.map(i => x += i, x = 0).reverse()[0];
         const maxBalance = Math.max(...arrBal);
         const minBalance = Math.min(...arrBal);
 
-        return {balance: balance, maxBalance: maxBalance, minBalance: minBalance};
+        return {
+            balance: pruningNumbers(balance, to),
+            maxBalance: pruningNumbers(maxBalance, to),
+            minBalance: pruningNumbers(minBalance, to),
+        };
     }
     private getCryptoInfo (id: number){
         const crypto = getById(this.crypto,id);
         const ccy = getById(ccyDb, crypto.ccyId);
         return {
-            balance: crypto.balance,
+            balance: pruningNumbers(crypto.balance, ccy.numberSign),
             name: ccy.name,
             shortName: ccy.shortName 
         };
