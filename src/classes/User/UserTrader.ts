@@ -26,9 +26,13 @@ export class UserTrader extends UserGoals implements IUserTrader {
         return <IOrder>getById(this.orders, id);
     }
 
-    public printAllOrders():Array<IOrder> {
+    public printAllOrders(): string {
         // TODO:  что это значит
-        return this.orders;
+        const testArr = [1,2,4,6,7];
+        const test = this.orders.map(item => UserTrader.getOrderInfo(item));
+        const test2 = test.map(item => `Ордер- ${item.id}: ${item.typeOrderId} - ${item.quantity} монет. Отдаю - ${item.give}, получаю - ${item.get}`)
+        console.log(test2);
+        return test2.join(', \t\n');
     }
 
     public printOrderById(id: number): string {
