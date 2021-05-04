@@ -9,7 +9,7 @@ import {typeCCY} from "../../interfaces/CCY/ICCY";
 export class UserTrader extends UserGoals implements IUserTrader {
     private orders: Array<IOrder> = ordersDb;
 
-    private static getOrderInfo(order: IOrder): { give: string; quantity: number; get: string; id: number; typeOrderId: string } {
+    protected static getOrderInfo(order: IOrder): { give: string; quantity: number; get: string; id: number; typeOrderId: string } {
         return {
             id: order.id,
             typeOrderId: typeOrder[order.typeOrderId],
@@ -31,17 +31,17 @@ export class UserTrader extends UserGoals implements IUserTrader {
         return this.orders;
     }
 
-    public printOrderById(id: number): { give: string; quantity: number; get: string; id: number; typeOrderId: string } {
+    public printOrderById(id: number): string {
         const order = getById(this.orders, id);
-
-        return UserTrader.getOrderInfo(order);
+        const orderInfo = UserTrader.getOrderInfo(order);
+        return `${orderInfo.typeOrderId} - ${orderInfo.quantity} монет. Отдаю - ${orderInfo.give}, получаю - ${orderInfo.get}`;
     }
 
     public removeOrderByKey(id: number): void {
         this.orders = removeById(this.orders, id);
     }
 
-    public setOrder(id: number, typeOrderId: typeOrder, quantity: number, give: number, get: number): void {
+    public setOrder(id: number, typeOrderId: typeOrder, quantity: number, give: typeCCY, get: typeCCY): void {
         const order = new Order(id, typeOrderId, quantity, give, get);
         this.orders.push({...order});
     }

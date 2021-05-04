@@ -6,6 +6,6 @@ export interface IUserTrader {
     getOrderById(id: number): IOrder
     setOrder(id: number, typeOrderId: typeOrder, quantity: number, give: typeCCY, get: typeCCY): void
     printAllOrders(): Array<IOrder>
-    printOrderById(id: number): { give: string; quantity: number; get: string; id: number; typeOrderId: string },
+    printOrderById(id: number): string,
     removeOrderByKey(id: number): void
 }
