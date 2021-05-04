@@ -1,5 +1,7 @@
+import {typeCCY} from "../CCY/ICCY";
+
 export interface ICtypro {
     id: number,
-    ccyId: number,
+    ccyId: typeCCY,
     balance: number
 }
