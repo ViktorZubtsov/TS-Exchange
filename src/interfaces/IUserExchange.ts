@@ -1,6 +1,6 @@
-import {ICtypro} from "../Crypto/ICtypro";
+import {ICtypro} from "./Crypto/ICtypro";
 
-export interface IUserShopper {
+export interface IUserExchange {
     getAllBalance(): number
     getAllCrypto():Array<ICtypro>
     printShortBalanceByKey(id: number): string

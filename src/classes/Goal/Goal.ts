@@ -8,10 +8,10 @@ export class Goal implements IGoal{
     to: number;
 
     constructor(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number) {
-        this.id = id;
-        this.typeId = typeId;
-        this.cryptoId = cryptoId;
-        this.goalComplete = goalComplete;
-        this.to = to;
+      this.id = id;
+      this.typeId = typeId;
+      this.cryptoId = cryptoId;
+      this.goalComplete = goalComplete;
+      this.to = to;
     }
 }

@@ -1,7 +1,7 @@
 import {UserExchange} from "./src/classes/UserExchange";
 
-const viktor = new UserExchange('wdwdwdw', 'dwdwd');
+const viktor = new UserExchange('mr.viktor.1996@yandex.ru', '1234');
 
 
-console.log(viktor.printGoal(1));
+console.log(viktor);
 

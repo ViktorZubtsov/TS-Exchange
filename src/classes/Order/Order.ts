@@ -8,10 +8,10 @@ export class Order implements IOrder {
     get: number;
 
     constructor(id: number, typeOrderId: number, quantity: number, give: number, get: number) {
-        this.id = id;
-        this.typeOrderId = typeOrderId;
-        this.quantity = quantity;
-        this.give = give;
-        this.get = get;
+      this.id = id;
+      this.typeOrderId = typeOrderId;
+      this.quantity = quantity;
+      this.give = give;
+      this.get = get;
     }
 }
