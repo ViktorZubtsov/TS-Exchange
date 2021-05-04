@@ -18,6 +18,11 @@ export class UserTrader extends UserGoals implements IUserTrader {
             get: typeCCY[order.get],
         };
     }
+    protected static printOrders (arr: Array<IOrder>): string {
+        const ordersInfo = arr.map(item => UserTrader.getOrderInfo(item));
+        const result = ordersInfo.map(item => `Ордер- ${item.id}: ${item.typeOrderId} - ${item.quantity} монет. Отдаю - ${item.give}, получаю - ${item.get}`);
+        return result.join(', \t\n');
+    }
     public getAllOrders(): Array<IOrder> {
         return this.orders;
     }
@@ -27,18 +32,13 @@ export class UserTrader extends UserGoals implements IUserTrader {
     }
 
     public printAllOrders(): string {
-        // TODO:  что это значит
-        const testArr = [1,2,4,6,7];
-        const test = this.orders.map(item => UserTrader.getOrderInfo(item));
-        const test2 = test.map(item => `Ордер- ${item.id}: ${item.typeOrderId} - ${item.quantity} монет. Отдаю - ${item.give}, получаю - ${item.get}`)
-        console.log(test2);
-        return test2.join(', \t\n');
+        return UserTrader.printOrders(this.orders);
     }
 
     public printOrderById(id: number): string {
         const order = getById(this.orders, id);
-        const orderInfo = UserTrader.getOrderInfo(order);
-        return `${orderInfo.typeOrderId} - ${orderInfo.quantity} монет. Отдаю - ${orderInfo.give}, получаю - ${orderInfo.get}`;
+
+        return UserTrader.printOrders([order]);
     }
 
     public removeOrderByKey(id: number): void {
