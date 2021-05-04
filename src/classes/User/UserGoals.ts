@@ -4,11 +4,12 @@ import {Goal} from "../Goal/Goal";
 import {IGoal, typeGoal} from "../../interfaces/Goal/IGoal";
 import {goalsDb} from "../../db/goalsDb";
 import {getById} from "../../helpers/helpers";
+import {cryptoDb} from "../../db/cryptoDb";
 
 export class UserGoals extends User implements IUserGoals{
     private goals: Array<IGoal> = goalsDb;
 
-    protected sortGoals(type?: string) {
+    protected sortGoals(type?: string): Array<IGoal> {
         const completeGoals = [];
         const notCompleteGoals = [];
 
@@ -20,7 +21,7 @@ export class UserGoals extends User implements IUserGoals{
             }
         }
         );
-        if(type === 'completeGoals'){
+        if(type){
             return completeGoals;
         } else {
             return notCompleteGoals;
@@ -44,19 +45,9 @@ export class UserGoals extends User implements IUserGoals{
     }
 
     public printGoal(id: number): string {
-        const goal = this.getGoalById(id);
-        console.log(goal);
-        switch (goal.typeId) {
-        case(0): {
-            return 'saving';
-        }
-        case(1): {
-            return 'for';
-        }
-        case(2): {
-            return 'multiply';
-        }
-        }
+        const goal = getById(this.goals, id);
+
+        return `Цель - ${goal.id}: ${typeGoal[goal.typeId]},  ${goal.to} монет, ${goal.goalComplete? 'Выполнена' : 'Не выполнена'} `;
     }
     public setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void {
         const goal = new Goal(id, typeId, cryptoId, goalComplete, to);
