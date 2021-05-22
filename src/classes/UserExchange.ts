@@ -1,9 +1,60 @@
-import {UserGoals} from "./User/UserGoals";
+import {IUserExchange} from "../interfaces/IUserExchange";
+import {ICtypro} from "../interfaces/Crypto/ICtypro";
+import {cryptoDb} from "../db/cryptoDb";
+import {UserTrader} from "./User/UserTrader";
+import {getById, pruningNumbers} from "../helpers/helpers";
+import {ccyDb} from "../db/ccyDb";
 
+export class UserExchange extends UserTrader implements IUserExchange {
+    private crypto: Array<ICtypro> = cryptoDb;
 
-export class UserExchange extends  UserGoals {
+    private calcCrypto(crypto: Array<ICtypro>): {balance: number, maxBalance: number,minBalance: number } {
 
-    public sortByKey(arr: [],key: string): void {
-        console.log('sortByKey', arr , key )
+      const arrBal = [];
+      crypto.forEach((item)=> {
+        arrBal.push(item.balance);
+      });
+      let x;
+      const to = 2;
+      const balance = arrBal.map(i => x += i, x = 0).reverse()[0];
+      const maxBalance = Math.max(...arrBal);
+      const minBalance = Math.min(...arrBal);
+
+      return {
+        balance: pruningNumbers(balance, to),
+        maxBalance: pruningNumbers(maxBalance, to),
+        minBalance: pruningNumbers(minBalance, to),
+      };
     }
+    private getCryptoInfo (id: number){
+      const crypto = getById(this.crypto,id);
+      const ccy = getById(ccyDb, crypto.ccyId);
+      return {
+        balance: pruningNumbers(crypto.balance, ccy.numberSign),
+        name: ccy.name,
+        shortName: ccy.shortName
+      };
+    }
+    public getAllBalance(): number {
+      return this.calcCrypto(this.crypto)['balance'];
+    }
+    public getAllCrypto(): Array<ICtypro> {
+      return this.crypto;
+    }
+    public printShortBalanceByKey(id: number): string {
+      return `${this.getCryptoInfo(id).balance} - ${this.getCryptoInfo(id).shortName}` ;
+    }
+    public printFullBalanceByKey(id: number): string {
+      return `${this.getCryptoInfo(id).balance} - ${this.getCryptoInfo(id).name}` ;
+    }
+    public getMaxBalance(): number {
+      return this.calcCrypto(this.crypto)['maxBalance'];
+    }
+    public getMinBalance(): number {
+      return this.calcCrypto(this.crypto)['minBalance'];
+    }
+
+
 }
+
+

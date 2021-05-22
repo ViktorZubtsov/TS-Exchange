@@ -1,8 +1,11 @@
+import {IOrder, typeOrder} from "../Order/IOrder";
+import {typeCCY} from "../CCY/ICCY";
+
 export interface IUserTrader {
-    getAllOrders(): Array<object>
-    getOrderById(): object
-    setOrder(): void
-    printAllOrders(): string
-    printOrderById(): string, 
-    removeOrderByKey(): void
+    getAllOrders(): Array<IOrder>
+    getOrderById(id: number): IOrder
+    setOrder(id: number, typeOrderId: typeOrder, quantity: number, give: typeCCY, get: typeCCY): void
+    printAllOrders(): string,
+    printOrderById(id: number): string,
+    removeOrderByKey(id: number): void
 }

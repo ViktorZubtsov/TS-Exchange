@@ -1,32 +1,43 @@
 import {IUser} from "../../interfaces/User/IUser";
+import {getRandomInt} from "../../helpers/helpers";
 import {Md5} from "ts-md5";
 
 export class User implements IUser{
-    protected mail: string
-    protected pass: any
+    private mail: string;
+    private pass: string | Int32Array;
+    private readonly id: number;
 
-    constructor(mail) {
-        this.mail = mail
+    constructor(mail: string, pass: string) {
+      this.mail = mail;
+      this.id = getRandomInt(16);
+      this.pass = User.generatePass(pass);
     }
-
+    public getId(): number {
+      return this.id;
+    }
     public getEmail(): string {
-        return this.mail
+      return this.mail;
     }
 
     public setEmail (newMail: string): void {
-        this.mail = newMail
+      this.mail = newMail;
     }
-    private generatePass(pass): void {
-        const md5 = new Md5();
-        md5.appendStr(pass)
-        md5.start()
-        this.pass  = md5.end()
+    private static generatePass(pass): string | Int32Array {
+      const md5 = new Md5();
+      md5.appendStr(pass)
+        .appendByteArray(new Uint8Array(8));
+      return md5.end();
     }
-    public setPass(pass: string): void {
-        this.generatePass(pass)
+    public setPass(oldPass: string, pass: string): void {
+      if (this.pass === User.generatePass(oldPass)) {
+        this.pass = User.generatePass(pass);
+      }
+      else {
+        throw new Error('Старый пароль не правильный !!!');
+      }
     }
-    public getPass(): string {
-        return  this.pass
-        //    TODO: Сделать разшифровку пароля, и разобраться как он рабботет до конца.
+    public getPass(): string | Int32Array {
+      return this.pass;
     }
+
 }
