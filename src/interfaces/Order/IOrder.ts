@@ -1,8 +1,14 @@
+import {typeCCY} from "../CCY/ICCY";
+export enum typeOrder {
+    buy,
+    sell,
+    trade
+}
 export interface IOrder {
     id: number
-    typeOrderId: string
-    quantity: string
-    give: number
-    get: number
+    typeOrderId: typeOrder
+    quantity: number
+    give: typeCCY
+    get: typeCCY
 }
 

@@ -1,38 +1,56 @@
 import {IUserGoals} from "../../interfaces/User/IUserGoals";
 import {User} from "./User";
 import {Goal} from "../Goal/Goal";
-import {goalsDb} from "../../db/goalsDb"
+import {IGoal, typeGoal} from "../../interfaces/Goal/IGoal";
+import {goalsDb} from "../../db/goalsDb";
+import {getById} from "../../helpers/helpers";
+import {cryptoDb} from "../../db/cryptoDb";
 
-export class UserGoals extends User implements  IUserGoals{
-    goals: Array<object> = goalsDb
+export class UserGoals extends User implements IUserGoals{
+    private goals: Array<IGoal> = goalsDb;
 
-    getAllGoals(): Array<object> {
-        return this.goals
+    protected sortGoals(type?: string): Array<IGoal> {
+      const completeGoals = [];
+      const notCompleteGoals = [];
+
+      this.goals.find((item) => {
+        if (item.goalComplete) {
+          completeGoals.push(item);
+        } else {
+          notCompleteGoals.push(item);
+        }
+      }
+      );
+      if(type){
+        return completeGoals;
+      } else {
+        return notCompleteGoals;
+      }
     }
 
-    getCompleteGoals(): Array<object> {
-        return [{name: 'getAllGoals'}];
+    public getAllGoals(): Array<IGoal> {
+      return this.goals;
     }
 
-    getGoalById(id: string): object {
-        return undefined;
+    public getCompleteGoals(): Array<IGoal> {
+      return this.sortGoals('completeGoals');
     }
 
-    getNotCompleteGoals(): Array<object> {
-        return [{name: 'getAllGoals'}];
+    public getGoalById(id: number): IGoal {
+      return <IGoal>getById(this.goals, id);
     }
 
-    printGoal(): void {
-        console.log('printGoal')
+    public getNotCompleteGoals(): Array<IGoal> {
+      return this.sortGoals();
     }
-    setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void  {
-        const goal = new Goal(id, typeId, cryptoId, goalComplete, to)
-        this.goals.push({
-            id: goal.id,
-            typeId: goal.typeId,
-            cryptoId: goal.cryptoId,
-            goalComplete: goal.goalComplete,
-            to: goal.to
-        })
-    };
+
+    public printGoal(id: number): string {
+      const goal = getById(this.goals, id);
+
+      return `Цель - ${goal.id}: ${typeGoal[goal.typeId]},  ${goal.to} монет, ${goal.goalComplete? 'Выполнена' : 'Не выполнена'} `;
+    }
+    public setGoal(id: number, typeId: number, cryptoId: number, goalComplete: boolean, to: number): void {
+      const goal = new Goal(id, typeId, cryptoId, goalComplete, to);
+      this.goals.push({...goal});
+    }
 }
